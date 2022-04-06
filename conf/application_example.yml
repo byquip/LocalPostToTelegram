@@ -1,0 +1,8 @@
+user:
+  email: yourlogin@example.com
+  password: yourpassword
+  server: smtp.example.com
+  link: some.link.com
+telegram:
+  chat_id: your_chat_id
+  TOKEN: your_telegram_token
