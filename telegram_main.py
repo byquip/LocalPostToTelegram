@@ -13,6 +13,7 @@ chat_id = conf['telegram']['chat_id']
 telbot = telebot.TeleBot(conf['telegram']['TOKEN'])  # init
 ReceiveMails_inst = ReceiveMails(conf)
 link = conf['user']['link']
+errors = list()
 
 
 @telbot.message_handler(commands=['start'])
@@ -44,7 +45,9 @@ def telbot_tread():
         try:
             telbot.polling(none_stop=True, interval=1)
         except Exception:
-            print('Telebot error: ', sys.exc_info())
+            er = f"Telebot error: {sys.exc_info()}"
+            errors.append(er)
+            print(er)
 
 
 def email_tread():
@@ -60,7 +63,9 @@ def email_tread():
                 else:
                     tel_send(0, froms, heads)
         except Exception:
-            print('Email error: ', sys.exc_info())
+            er = f"Telebot error: {sys.exc_info()}"
+            errors.append(er)
+            print(er)
 
 
 def tel_send(letter_num, froms, heads):

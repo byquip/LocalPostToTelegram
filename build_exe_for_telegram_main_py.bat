@@ -1,1 +1,1 @@
-pyinstaller --onefile --noconsole telegram_main.py
+pyinstaller --onefile --noconsole tray_app.py

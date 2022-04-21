@@ -1,6 +1,5 @@
-import email
 import imaplib
-from email import policy
+from email import policy, message_from_bytes
 
 
 class ReceiveMails:
@@ -26,7 +25,7 @@ class ReceiveMails:
         if retcode == 'OK':
             for num in messages[0].split():
                 print('Processing ')
-                self.n = self.n + 1
+                self.n += 1
                 typ, data = mail.fetch(num, '(RFC822)')
                 for response_part in data:
                     if isinstance(response_part, tuple):
