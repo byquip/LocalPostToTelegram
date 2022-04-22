@@ -1,1 +1,1 @@
-pyinstaller --onefile --noconsole tray_app.py
+pyinstaller --onefile --noconsole tray_app.pyw --add-data "*.png;." --add-data "*.py;." --add-data "conf;conf"

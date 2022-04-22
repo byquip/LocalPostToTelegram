@@ -1,23 +1,24 @@
-from telegram_main import main
+from telegram_main import main, dirname
+from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QMainWindow, QApplication, QSystemTrayIcon, QMenu, QAction, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QApplication, QSystemTrayIcon, QMenu, QAction, QMessageBox, QWidget
 import sys
 import threading
+import os
 
 
 class TrayApplication(QMainWindow):
     def __init__(self):
         super(TrayApplication, self).__init__()
         # Adding an icon
-        self.icon = QIcon("icon.png")
-
+        self.icon = QIcon(os.path.join(dirname, "icon.png"))
         # Adding item on the menu bar
         self.tray = QSystemTrayIcon()
         self.tray.setIcon(self.icon)
-        self.tray.setVisible(True)
 
         # Creating the options
         self.menu = QMenu()
+
         self.option1 = QAction("info")
         self.quit = QAction("quit")
 
@@ -25,11 +26,13 @@ class TrayApplication(QMainWindow):
         self.menu.addAction(self.quit)
 
         self.option1.triggered.connect(lambda: self.show_message())
-        self.quit.triggered.connect(quit)
+        self.quit.triggered.connect(lambda: QCoreApplication.exit())
 
         # Adding options to the System Tray
         self.tray.setContextMenu(self.menu)
         self.tray.setToolTip("Post to TelegramBot app")
+        self.tray.setVisible(True)
+        self.tray.sgow()
 
     @staticmethod
     def show_message():
@@ -46,6 +49,7 @@ def gui():
     app = QApplication([])
     app.setQuitOnLastWindowClosed(False)
     _ = TrayApplication()
+    # application.show()
     sys.exit(app.exec())
 
 

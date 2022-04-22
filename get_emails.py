@@ -29,7 +29,7 @@ class ReceiveMails:
                 typ, data = mail.fetch(num, '(RFC822)')
                 for response_part in data:
                     if isinstance(response_part, tuple):
-                        original = email.message_from_bytes(response_part[1], policy=policy.default)
+                        original = message_from_bytes(response_part[1], policy=policy.default)
                         self.froms.append(original['From'])
                         self.heads.append(original['Subject'])
                         _, _ = mail.store(num, '+FLAGS', '\\Seen')

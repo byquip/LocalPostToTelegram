@@ -5,10 +5,13 @@ from get_emails import ReceiveMails
 import telebot  # type: ignore
 import logging
 import yaml
+import os
+dirname = os.path.dirname(__file__)
+filename = os.path.join(dirname, 'conf', 'application.yml')
 
 # log level
 logging.basicConfig(level=logging.INFO)
-conf = yaml.safe_load(open("conf/application.yml"))
+conf = yaml.safe_load(open(filename))
 chat_id = conf['telegram']['chat_id']
 telbot = telebot.TeleBot(conf['telegram']['TOKEN'])  # init
 ReceiveMails_inst = ReceiveMails(conf)
@@ -63,7 +66,7 @@ def email_tread():
                 else:
                     tel_send(0, froms, heads)
         except Exception:
-            er = f"Telebot error: {sys.exc_info()}"
+            er = f"Email error: {sys.exc_info()}"
             errors.append(er)
             print(er)
 
