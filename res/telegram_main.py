@@ -7,7 +7,7 @@ import logging
 import yaml
 import os
 dirname = os.path.dirname(__file__)
-filename = os.path.join(dirname, 'conf', 'application.yml')
+filename = os.path.join(dirname, '../conf', 'application.yml')
 
 # log level
 logging.basicConfig(level=logging.INFO)
